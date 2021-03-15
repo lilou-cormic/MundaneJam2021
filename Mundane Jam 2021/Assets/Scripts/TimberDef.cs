@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using UnityEngine;
+﻿using UnityEngine;
 
 [CreateAssetMenu(fileName = "Timber", menuName = "Timber")]
 public class TimberDef : ScriptableObject
@@ -9,7 +7,5 @@ public class TimberDef : ScriptableObject
 
     public int Integrity;
 
-    public ResourceType[] Recipe;
-
-    public Dictionary<ResourceType, int> ResourceCount => Recipe.GroupBy(x => x).ToDictionary(x => x.Key, y => y.Count());
+    public Recipe Recipe;
 }

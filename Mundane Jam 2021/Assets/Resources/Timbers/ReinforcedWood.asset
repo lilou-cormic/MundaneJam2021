@@ -14,6 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   WeightLimit: 30
   Integrity: 5
-  Recipe: 000000000000000001000000
-  Image: {fileID: 0}
-  TimberPrefab: {fileID: 0}
+  Recipe:
+    Resources: 000000000000000001000000

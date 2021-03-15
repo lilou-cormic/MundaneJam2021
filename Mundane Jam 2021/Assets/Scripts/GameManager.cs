@@ -81,10 +81,6 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
-        //HACK
-        if (Input.GetButtonDown("Fire1"))
-            TimberPool.Current.GetTimber(Timbers.GetDefs().ToArray().GetRandom());
-
         if (Input.GetButtonDown("Pause") || Input.GetButtonDown("Cancel"))
             IsPaused = !IsPaused;
     }

@@ -58,7 +58,10 @@ public class TimberPool : Pool<Timber, TimberDef>
 
     public Timber GetTimber(TimberDef timberDef)
     {
-        ResourceInventory.Current.TakeResources(timberDef);
+        if (timberDef == null || !ResourceInventory.Current.HasResources(timberDef.Recipe))
+            return null;
+
+        ResourceInventory.Current.TakeResources(timberDef.Recipe);
 
         Timber timber = GetItem(timberDef);
         timber.transform.position = GameManager.Player.transform.position + Vector3.up;

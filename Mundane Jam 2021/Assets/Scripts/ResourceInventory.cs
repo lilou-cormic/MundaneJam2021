@@ -8,7 +8,7 @@ public class ResourceInventory : MonoBehaviour
 
     private Dictionary<ResourceType, int> resources;
 
-    public event Action<ResourceType> ResourceCountChanged;
+    public static event Action<ResourceType> ResourceCountChanged;
 
     private void Awake()
     {
@@ -22,7 +22,7 @@ public class ResourceInventory : MonoBehaviour
         }
     }
 
-    public bool HasResources(TimberDef recipe)
+    public bool HasResources(Recipe recipe)
     {
         foreach (var item in recipe.ResourceCount)
         {
@@ -33,7 +33,7 @@ public class ResourceInventory : MonoBehaviour
         return true;
     }
 
-    public void TakeResources(TimberDef recipe)
+    public void TakeResources(Recipe recipe)
     {
         foreach (var item in recipe.ResourceCount)
         {
@@ -48,5 +48,10 @@ public class ResourceInventory : MonoBehaviour
         resources[resource]++;
 
         ResourceCountChanged?.Invoke(resource);
+    }
+
+    public int GetCount(ResourceType resourceType)
+    {
+        return resources[resourceType];
     }
 }
