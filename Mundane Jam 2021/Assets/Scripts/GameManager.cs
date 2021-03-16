@@ -1,10 +1,7 @@
 ﻿using PurpleCable;
-using System;
 using System.Collections;
-using System.Linq;
 using UnityEngine;
 using UnityEngine.EventSystems;
-using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
@@ -14,6 +11,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] MainMenu MainMenu = null;
 
     [SerializeField] GameObject PausePanel = null;
+
+    public static float TimeLeft { get; private set; }
 
     private bool _IsPaused = false;
     private bool IsPaused
@@ -69,6 +68,8 @@ public class GameManager : MonoBehaviour
         if (CurrentLevelNumber == 0)
             LevelNumber = 1;
 
+        TimeLeft = 120f;
+
         ScoreManager.ResetScore();
     }
 
@@ -81,8 +82,14 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
+        if (!_gameIsEnding)
+            TimeLeft -= Time.deltaTime;
+
         if (Input.GetButtonDown("Pause") || Input.GetButtonDown("Cancel"))
             IsPaused = !IsPaused;
+
+        if (TimeLeft <= 0)
+            Win();
     }
 
     public static void Win()
@@ -129,7 +136,7 @@ public class GameManager : MonoBehaviour
             //if (Settings.Difficulty == Settings.DifficultyMode.Hard)
             LevelNumber = 1;
 
-            yield return new WaitForSeconds(2f);
+            yield return new WaitForSeconds(0.02f);
 
             MainMenu.LoadScene("GameOver");
         }
