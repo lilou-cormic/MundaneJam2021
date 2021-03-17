@@ -46,9 +46,6 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
-  - name: Ground
-    uniqueID: 858750915
-    locked: 0
   - name: CraftedItem
     uniqueID: 2059103361
     locked: 0
@@ -57,6 +54,9 @@ TagManager:
     locked: 0
   - name: Timber
     uniqueID: 2835867083
+    locked: 0
+  - name: Ground
+    uniqueID: 858750915
     locked: 0
   - name: Rocket
     uniqueID: 882772309

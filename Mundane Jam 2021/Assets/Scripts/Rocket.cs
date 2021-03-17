@@ -1,16 +1,27 @@
 using System.Collections;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class Rocket : MonoBehaviour
 {
     private CapsuleCollider2D capsuleCollider = null;
 
+    private Rigidbody2D rb = null;
+
+    private SpriteRenderer SpriteRenderer = null;
+
+    [SerializeField] GameObject Fire = null;
+
     private bool _isExploding = false;
+
+    private bool _isTakingOff = false;
+
+    private float t = 0f;
 
     private void Awake()
     {
         capsuleCollider = GetComponent<CapsuleCollider2D>();
+        rb = GetComponent<Rigidbody2D>();
+        SpriteRenderer = GetComponent<SpriteRenderer>();
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -56,5 +67,31 @@ public class Rocket : MonoBehaviour
         }
 
         GameManager.GameOver();
+    }
+
+    public void TakeOff()
+    {
+        Fire.SetActive(true);
+
+        _isTakingOff = true;
+    }
+
+    private void FixedUpdate()
+    {
+
+        if (_isTakingOff)
+            rb.AddForce(transform.up * 20f);
+
+        if (_isExploding)
+        {
+            t += Time.deltaTime;
+
+            SpriteRenderer.color = Color.Lerp(Color.white, Color.gray, t / 3);
+        }
+        else
+        {
+            if (Mathf.Abs(rb.rotation) > 15)
+                StartCoroutine(DoExplode());
+        }
     }
 }

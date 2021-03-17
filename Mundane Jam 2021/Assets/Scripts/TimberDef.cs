@@ -8,4 +8,6 @@ public class TimberDef : ScriptableObject
     public int Integrity;
 
     public Recipe Recipe;
+
+    public Sprite Image;
 }

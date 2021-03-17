@@ -8,6 +8,9 @@ public class GameManager : MonoBehaviour
     [SerializeField] Player _Player = null;
     public static Player Player => Current._Player;
 
+    [SerializeField] Rocket _Rocket = null;
+    public static Rocket Rocket => Current._Rocket;
+
     [SerializeField] MainMenu MainMenu = null;
 
     [SerializeField] GameObject PausePanel = null;
@@ -109,7 +112,9 @@ public class GameManager : MonoBehaviour
 
             LevelNumber++;
 
-            yield return new WaitForSeconds(2f);
+            Rocket.TakeOff();
+
+            yield return new WaitForSeconds(3f);
 
             //if (CurrentLevel != null)
             MainMenu.LoadScene("Win");

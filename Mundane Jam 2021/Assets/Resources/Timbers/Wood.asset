@@ -16,3 +16,4 @@ MonoBehaviour:
   Integrity: 3
   Recipe:
     Resources: 000000000000000000000000
+  Image: {fileID: 21300000, guid: 7f4f34899ac4ac747ad32dc22a665117, type: 3}

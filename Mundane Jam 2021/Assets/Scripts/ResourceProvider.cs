@@ -4,8 +4,6 @@ public class ResourceProvider : MonoBehaviour
 {
     [SerializeField] ResourceProviderDef Def = null;
 
-    [SerializeField] GameObject Tooltip = null;
-
     private int _PressesLeft;
 
     private bool _isCollecting = false;
@@ -13,9 +11,6 @@ public class ResourceProvider : MonoBehaviour
     private void Start()
     {
         _PressesLeft = Def.ButtonPresses;
-
-        if (Tooltip != null)
-            Tooltip.SetActive(false);
     }
 
     public void Collect()
@@ -39,17 +34,5 @@ public class ResourceProvider : MonoBehaviour
         }
 
         _isCollecting = false;
-    }
-
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (Tooltip != null)
-            Tooltip.SetActive(true);
-    }
-
-    private void OnTriggerExit2D(Collider2D collision)
-    {
-        if (Tooltip != null)
-            Tooltip.SetActive(false);
     }
 }

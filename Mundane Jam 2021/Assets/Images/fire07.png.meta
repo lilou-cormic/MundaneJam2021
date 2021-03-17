@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 7f4f34899ac4ac747ad32dc22a665117
+guid: f0e73e6bf101ec64094b6bce437d890a
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -32,7 +32,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 1
+    filterMode: -1
     aniso: -1
     mipBias: -100
     wrapU: 1
@@ -43,8 +43,8 @@ TextureImporter:
   compressionQuality: 50
   spriteMode: 1
   spriteExtrude: 1
-  spriteMeshType: 0
-  alignment: 0
+  spriteMeshType: 1
+  alignment: 2
   spritePivot: {x: 0.5, y: 0.5}
   spritePixelsToUnits: 32
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}

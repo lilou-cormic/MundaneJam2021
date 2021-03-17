@@ -1,6 +1,3 @@
-using PurpleCable;
-using System.Collections;
-using System.Linq;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D))]
@@ -13,11 +10,17 @@ public class Player : MonoBehaviour
 
     [SerializeField] SpriteRenderer SpriteRenderer = null;
 
+    [SerializeField] GroundDetector GroundDetector = null;
+
+    [SerializeField] SpriteRenderer CraftedItem = null;
+
     private bool _isDead = false;
 
     private ResourceProvider _resourceProvider = null;
 
     private bool _canPlace = false;
+
+    private bool _isGrounded = false;
 
     private void Awake()
     {
@@ -33,29 +36,34 @@ public class Player : MonoBehaviour
 
         var horizontal = Input.GetAxisRaw("Horizontal");
 
-        MoveController.Move(transform, horizontal, 10);
+        MoveController.Move(transform, horizontal, 8);
 
         Animator.SetFloat("speed", Mathf.Abs(horizontal));
+        Animator.SetBool("jump", !GroundDetector.IsGrounded);
 
-        //HACK
-        if (Input.GetButtonDown("Fire1"))
+        CraftedItem.sprite = (_canPlace && ResourceInventory.Current.HasResources(TimberFactory.Current.SelectedTimberType.Recipe) ? TimberFactory.Current.SelectedTimberType.Image : null);
+
+        if (GroundDetector.IsGrounded)
         {
-            if (_resourceProvider != null)
-                _resourceProvider.Collect();
-            else if (_canPlace)
-                TimberPool.Current.GetTimber(Timbers.GetDefs().Where(x => ResourceInventory.Current.HasResources(x.Recipe)).ToArray().GetRandom());
-        }
+            //HACK
+            if (Input.GetButtonDown("Fire1"))
+            {
+                if (_resourceProvider != null)
+                    _resourceProvider.Collect();
+                else if (_canPlace)
+                    TimberPool.Current.GetTimber(TimberFactory.Current.SelectedTimberType);
+            }
 
+            //HACK
+            if (Input.GetButtonDown("Jump"))
+            {
+                Animator.SetBool("jump", true);
 
-
-        //HACK
-
-        if (Input.GetButtonDown("Jump"))
-        {
-            if (Input.GetAxisRaw("Vertical") > 0.01f)
-                transform.position += Vector3.up * 2.2f;
-            else if (Input.GetAxisRaw("Vertical") < -0.01f)
-                transform.position += Vector3.down * 2.2f;
+                if (Input.GetAxisRaw("Vertical") < -0.01f)
+                    transform.position += Vector3.down * 2.2f;
+                else
+                    transform.position += Vector3.up * 2.5f;
+            }
         }
     }
 
