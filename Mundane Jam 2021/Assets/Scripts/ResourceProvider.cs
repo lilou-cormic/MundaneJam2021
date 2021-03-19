@@ -2,7 +2,7 @@
 
 public class ResourceProvider : MonoBehaviour
 {
-    [SerializeField] ResourceProviderDef Def = null;
+    [SerializeField] internal ResourceProviderDef Def = null;
 
     private int _PressesLeft;
 

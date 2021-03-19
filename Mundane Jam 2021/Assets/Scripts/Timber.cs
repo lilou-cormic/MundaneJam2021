@@ -11,6 +11,8 @@ public class Timber : MonoBehaviour, IPoolable
 
     [SerializeField] Sprite[] Images;
 
+    [SerializeField] GameObject PiecesPrefab = null;
+
     private int _Integrity;
     public int Integrity
     {
@@ -44,7 +46,6 @@ public class Timber : MonoBehaviour, IPoolable
         Integrity = Def.Integrity;
 
         SpriteRenderer.flipX = Random.value > 0.5f;
-        SpriteRenderer.flipY = Random.value > 0.5f;
     }
 
     private void Update()
@@ -61,6 +62,17 @@ public class Timber : MonoBehaviour, IPoolable
                 if (Integrity <= 0)
                 {
                     _isDestroyed = true;
+
+                    if (PiecesPrefab != null)
+                    {
+                        var pieces = Instantiate(PiecesPrefab, transform.position, transform.rotation);
+
+                        if (SpriteRenderer.flipX)
+                            pieces.transform.localScale = new Vector3(-1, 1, 1);
+
+                        Destroy(pieces, 1.2f);
+                    }
+
                     gameObject.SetActive(false);
                     return;
                 }

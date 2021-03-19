@@ -15,6 +15,8 @@ public class GameManager : MonoBehaviour
 
     [SerializeField] GameObject PausePanel = null;
 
+    [SerializeField] float LevelTime = 120f;
+
     public static float TimeLeft { get; private set; }
 
     private bool _IsPaused = false;
@@ -71,7 +73,7 @@ public class GameManager : MonoBehaviour
         if (CurrentLevelNumber == 0)
             LevelNumber = 1;
 
-        TimeLeft = 120f;
+        TimeLeft = LevelTime;
 
         ScoreManager.ResetScore();
     }

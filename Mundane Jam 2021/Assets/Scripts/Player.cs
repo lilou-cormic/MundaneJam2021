@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D))]
@@ -14,19 +15,28 @@ public class Player : MonoBehaviour
 
     [SerializeField] SpriteRenderer CraftedItem = null;
 
+    [SerializeField] AudioClip JumpSound = null;
+
+    [SerializeField] AudioClip PlaceSound = null;
+
+    [SerializeField] GameObject Axe = null;
+
+    [SerializeField] GameObject Pickaxe = null;
+
     private bool _isDead = false;
 
     private ResourceProvider _resourceProvider = null;
 
     private bool _canPlace = false;
 
-    private bool _isGrounded = false;
-
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
 
         Animator = GetComponent<Animator>();
+
+        Axe.SetActive(false);
+        Pickaxe.SetActive(false);
     }
 
     private void Update()
@@ -45,18 +55,35 @@ public class Player : MonoBehaviour
 
         if (GroundDetector.IsGrounded)
         {
-            //HACK
             if (Input.GetButtonDown("Fire1"))
             {
                 if (_resourceProvider != null)
+                {
                     _resourceProvider.Collect();
+
+                    switch (_resourceProvider.Def.ResourceType)
+                    {
+                        case ResourceType.Wood:
+                            StartCoroutine(DoShowTool(Axe));
+                            break;
+
+                        case ResourceType.Stone:
+                            StartCoroutine(DoShowTool(Pickaxe));
+                            break;
+                    }
+
+                }
                 else if (_canPlace)
-                    TimberPool.Current.GetTimber(TimberFactory.Current.SelectedTimberType);
+                {
+                    if (TimberPool.Current.GetTimber(TimberFactory.Current.SelectedTimberType) != null)
+                        PlaceSound.Play();
+                }
             }
 
-            //HACK
             if (Input.GetButtonDown("Jump"))
             {
+                JumpSound.Play();
+
                 Animator.SetBool("jump", true);
 
                 if (Input.GetAxisRaw("Vertical") < -0.01f)
@@ -67,11 +94,22 @@ public class Player : MonoBehaviour
         }
     }
 
+    private IEnumerator DoShowTool(GameObject tool)
+    {
+        tool.SetActive(true);
+
+        yield return new WaitForSeconds(0.1f);
+
+        tool.SetActive(false);
+    }
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        _resourceProvider = collision.GetComponent<ResourceProvider>();
+        if (collision.GetComponent<ResourceProvider>() != null)
+            _resourceProvider = collision.GetComponent<ResourceProvider>();
 
-        _canPlace = collision.CompareTag("Platform");
+        if (collision.CompareTag("WorkArea"))
+            _canPlace = true;
     }
 
     private void OnTriggerExit2D(Collider2D collision)
@@ -79,7 +117,7 @@ public class Player : MonoBehaviour
         if (collision.GetComponent<ResourceProvider>() != null)
             _resourceProvider = null;
 
-        if (collision.CompareTag("Platform"))
+        if (collision.CompareTag("WorkArea"))
             _canPlace = false;
     }
 }

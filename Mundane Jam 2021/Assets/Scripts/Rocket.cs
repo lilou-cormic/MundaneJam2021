@@ -71,7 +71,14 @@ public class Rocket : MonoBehaviour
 
     public void TakeOff()
     {
+        StartCoroutine(DoTakeOff());
+    }
+
+    private IEnumerator DoTakeOff()
+    {
         Fire.SetActive(true);
+
+        yield return new WaitForSeconds(0.3f);
 
         _isTakingOff = true;
     }
@@ -80,7 +87,7 @@ public class Rocket : MonoBehaviour
     {
 
         if (_isTakingOff)
-            rb.AddForce(transform.up * 20f);
+            rb.AddForce(transform.up * 40f);
 
         if (_isExploding)
         {

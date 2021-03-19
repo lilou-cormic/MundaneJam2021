@@ -88,6 +88,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 11400000, guid: 1180fd440f7f7124296991077a6ec8bf, type: 2}
     - target: {fileID: 8881150187739617740, guid: 46d6054be942bed468b20cb4a9dc0b05, type: 3}
+      propertyPath: PiecesPrefab
+      value: 
+      objectReference: {fileID: 1893553476574341733, guid: 4c03d60623f5af848ae79fca6b91bf35, type: 3}
+    - target: {fileID: 8881150187739617740, guid: 46d6054be942bed468b20cb4a9dc0b05, type: 3}
       propertyPath: Images.Array.size
       value: 3
       objectReference: {fileID: 0}
