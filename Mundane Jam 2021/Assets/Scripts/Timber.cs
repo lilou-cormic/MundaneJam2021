@@ -44,8 +44,6 @@ public class Timber : MonoBehaviour, IPoolable
         _isDestroyed = false;
 
         Integrity = Def.Integrity;
-
-        SpriteRenderer.flipX = Random.value > 0.5f;
     }
 
     private void Update()

@@ -13,7 +13,7 @@ PrefabInstance:
       objectReference: {fileID: 21300000, guid: ff46dc5edb4ad664a90da01785fdd0e5, type: 3}
     - target: {fileID: 7990309631005969532, guid: 46d6054be942bed468b20cb4a9dc0b05, type: 3}
       propertyPath: m_Size.x
-      value: 1.27
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7990309631005969533, guid: 46d6054be942bed468b20cb4a9dc0b05, type: 3}
       propertyPath: m_Name
@@ -71,6 +71,10 @@ PrefabInstance:
       propertyPath: _Def
       value: 
       objectReference: {fileID: 11400000, guid: 54434d552fd152e49af5084fcce4d024, type: 2}
+    - target: {fileID: 8881150187739617740, guid: 46d6054be942bed468b20cb4a9dc0b05, type: 3}
+      propertyPath: PiecesPrefab
+      value: 
+      objectReference: {fileID: 1893553476574341733, guid: 39ca61c9635800948b1de0e213490f16, type: 3}
     - target: {fileID: 8881150187739617740, guid: 46d6054be942bed468b20cb4a9dc0b05, type: 3}
       propertyPath: Images.Array.size
       value: 3

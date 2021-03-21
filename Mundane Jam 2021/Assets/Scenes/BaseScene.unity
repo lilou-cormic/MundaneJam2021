@@ -270,6 +270,7 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
+  m_PresetInfoIsWorld: 0
 --- !u!223 &848865596
 Canvas:
   m_ObjectHideFlags: 0
@@ -335,6 +336,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2823800662759689913, guid: 03e1b14f6228a1948965979d24c652c5, type: 3}
+      propertyPath: m_audioClip
+      value: 
+      objectReference: {fileID: 8300000, guid: ac11720e570930144b311afa4e631200, type: 3}
     - target: {fileID: 4406107484264513081, guid: 03e1b14f6228a1948965979d24c652c5, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -379,6 +384,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4406107484264513086, guid: 03e1b14f6228a1948965979d24c652c5, type: 3}
+      propertyPath: m_audioClip
+      value: 
+      objectReference: {fileID: 8300000, guid: ad22684cb40179949ba6b483fec9ecab, type: 3}
     - target: {fileID: 4406107484264513087, guid: 03e1b14f6228a1948965979d24c652c5, type: 3}
       propertyPath: m_Name
       value: MusicPlayer
