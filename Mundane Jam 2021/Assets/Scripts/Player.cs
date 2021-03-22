@@ -23,6 +23,8 @@ public class Player : MonoBehaviour
 
     [SerializeField] GameObject Pickaxe = null;
 
+    [SerializeField] AudioClip CollectSound = null;
+
     private bool _isDead = false;
 
     private ResourceProvider _resourceProvider = null;
@@ -59,6 +61,7 @@ public class Player : MonoBehaviour
             {
                 if (_resourceProvider != null)
                 {
+                    CollectSound.PlayRandomPitch();
                     _resourceProvider.Collect();
 
                     switch (_resourceProvider.Def.ResourceType)

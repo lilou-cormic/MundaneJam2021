@@ -70,6 +70,7 @@ namespace PurpleCable
                 case "Options":
                 case "Settings":
                 case "Tutorial":
+                case "LevelSelect":
                     GameMusicAudioSource.Stop();
 
                     if (!MenuMusicAudioSource.isPlaying)

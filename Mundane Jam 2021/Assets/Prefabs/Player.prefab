@@ -79,6 +79,7 @@ MonoBehaviour:
   PlaceSound: {fileID: 8300000, guid: 696e1ecaac70f1f4a87029c5db265f8a, type: 3}
   Axe: {fileID: 2346352130537972012}
   Pickaxe: {fileID: 7179525552237004104}
+  CollectSound: {fileID: 8300000, guid: f752eac8812a79446aa68137685bbda0, type: 3}
 --- !u!95 &149977535453552303
 Animator:
   serializedVersion: 3

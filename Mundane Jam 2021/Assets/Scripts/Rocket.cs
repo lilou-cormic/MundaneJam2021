@@ -11,6 +11,11 @@ public class Rocket : MonoBehaviour
 
     [SerializeField] GameObject Fire = null;
 
+    [SerializeField] AudioClip TakeOffSound = null;
+
+    [SerializeField] float _CountDownTime = 120f;
+    public float CountDownTime => _CountDownTime;
+
     private bool _isExploding = false;
 
     private bool _isTakingOff = false;
@@ -77,6 +82,8 @@ public class Rocket : MonoBehaviour
     private IEnumerator DoTakeOff()
     {
         Fire.SetActive(true);
+
+        TakeOffSound.Play();
 
         yield return new WaitForSeconds(0.3f);
 

@@ -13,10 +13,10 @@ PlayerSettings:
   useOnDemandResources: 0
   accelerometerFrequency: 60
   companyName: Purple Cable
-  productName: Mundane Jam 2021
+  productName: Robot Rocket Rescue
   defaultCursor: {fileID: 0}
   cursorHotspot: {x: 0, y: 0}
-  m_SplashScreenBackgroundColor: {r: 0.13725491, g: 0.12156863, b: 0.1254902, a: 1}
+  m_SplashScreenBackgroundColor: {r: 0, g: 0, b: 0, a: 1}
   m_ShowUnitySplashScreen: 1
   m_ShowUnitySplashLogo: 1
   m_SplashScreenOverlayOpacity: 1
@@ -39,7 +39,15 @@ PlayerSettings:
     y: 0
     width: 1
     height: 1
-  m_SplashScreenLogos: []
+  m_SplashScreenLogos:
+  - logo: {fileID: 21300000, guid: 380b67128e6d7ba409687b36331ba8ce, type: 3}
+    duration: 2
+  - logo: {fileID: 21300000, guid: f088cdaf44e5dbb46a56afaa91540542, type: 3}
+    duration: 2
+  - logo: {fileID: 21300000, guid: 9e00e81d4f44afa4d8d5d7bb726d90b7, type: 3}
+    duration: 2
+  - logo: {fileID: 21300000, guid: a5803a906bb17844eaa249a4e636bb8a, type: 3}
+    duration: 2
   m_VirtualRealitySplashScreen: {fileID: 0}
   m_HolographicTrackingLossScreen: {fileID: 0}
   defaultScreenWidth: 1920

@@ -23,7 +23,7 @@ public class TimberFactory : MonoBehaviour
     {
         if (Input.GetButtonDown("Fire3"))
         {
-            int next = (TimberTypeSelects.ToList().FindIndex(x => x.TimberType == SelectedTimberType) + 1) % TimberTypeSelects.Length;
+            int next = ((TimberTypeSelects.ToList().FindIndex(x => x.TimberType == SelectedTimberType) + Mathf.RoundToInt(Input.GetAxisRaw("Fire3"))) + TimberTypeSelects.Length) % TimberTypeSelects.Length;
 
             EventSystem.SetSelectedGameObject(TimberTypeSelects[next].gameObject);
         }

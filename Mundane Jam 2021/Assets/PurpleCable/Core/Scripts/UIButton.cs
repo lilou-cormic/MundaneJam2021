@@ -16,12 +16,11 @@ namespace PurpleCable
         [SerializeField]
         private AudioClip SelectedSound = null;
 
-#if UNITY_EDITOR
         [SerializeField]
         private TextMeshProUGUI LabelText = null;
 
         [SerializeField]
-        private string Label = string.Empty;
+        protected string Label = string.Empty;
 
         private void OnValidate()
         {
@@ -33,7 +32,6 @@ namespace PurpleCable
             else if (!string.IsNullOrEmpty(Label))
                 LabelText.text = Label;
         }
-#endif
 
         private void Awake()
         {

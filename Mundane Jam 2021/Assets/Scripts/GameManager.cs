@@ -2,20 +2,19 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
     [SerializeField] Player _Player = null;
     public static Player Player => Current._Player;
 
-    [SerializeField] Rocket _Rocket = null;
-    public static Rocket Rocket => Current._Rocket;
-
     [SerializeField] MainMenu MainMenu = null;
 
     [SerializeField] GameObject PausePanel = null;
 
-    [SerializeField] float LevelTime = 120f;
+    private Rocket _Rocket = null;
+    public static Rocket Rocket => Current._Rocket;
 
     public static float TimeLeft { get; private set; }
 
@@ -49,7 +48,7 @@ public class GameManager : MonoBehaviour
 
     private static GameManager Current { get; set; }
 
-    public static int CurrentLevelNumber { get; private set; } = 0;
+    public static int CurrentLevelNumber { get; set; } = 0;
 
     public int LevelNumber
     {
@@ -57,7 +56,7 @@ public class GameManager : MonoBehaviour
 
         set
         {
-            CurrentLevelNumber = value;
+            CurrentLevelNumber = Mathf.Min(value, 6);
         }
     }
 
@@ -73,9 +72,15 @@ public class GameManager : MonoBehaviour
         if (CurrentLevelNumber == 0)
             LevelNumber = 1;
 
-        TimeLeft = LevelTime;
+        SceneManager.LoadScene($"Level{CurrentLevelNumber}", mode: LoadSceneMode.Additive);
 
         ScoreManager.ResetScore();
+    }
+
+    private void Start()
+    {
+        _Rocket = FindObjectOfType<Rocket>();
+        TimeLeft = _Rocket.CountDownTime;
     }
 
     private void OnDestroy()
@@ -112,16 +117,33 @@ public class GameManager : MonoBehaviour
             ScoreManager.AddPoints(LevelNumber);
             ScoreManager.SetHighScore();
 
-            LevelNumber++;
+            string oldLevelStates = PlayerPrefs.GetString("LevelStates", "000000");
+            string newLevelStates = string.Empty;
+
+            for (int i = 0; i < 6; i++)
+            {
+                if (i + 1 == LevelNumber)
+                    newLevelStates += "1";
+                else
+                    newLevelStates += oldLevelStates[i].ToString();
+            }
+
+            PlayerPrefs.SetString("LevelStates", newLevelStates);
 
             Rocket.TakeOff();
 
             yield return new WaitForSeconds(3f);
 
-            //if (CurrentLevel != null)
-            MainMenu.LoadScene("Win");
-            //else
-            //    MainMenu.LoadScene("Congratulations");
+            if (LevelNumber < 6)
+            {
+                LevelNumber++;
+
+                MainMenu.LoadScene("Win");
+            }
+            else
+            {
+                MainMenu.LoadScene("LevelSelect");
+            }
         }
     }
 
@@ -136,12 +158,6 @@ public class GameManager : MonoBehaviour
 
             GetComponent<MusicWithIntro>()?.Stop();
             //MusicManager.PlayLoseJingle();
-
-            ScoreManager.AddPoints(LevelNumber - 1);
-            ScoreManager.SetHighScore();
-
-            //if (Settings.Difficulty == Settings.DifficultyMode.Hard)
-            LevelNumber = 1;
 
             yield return new WaitForSeconds(0.02f);
 

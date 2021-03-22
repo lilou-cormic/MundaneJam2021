@@ -344,6 +344,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Fire: {fileID: 4670180585177142562}
+  TakeOffSound: {fileID: 8300000, guid: 928747a675d481f42bee390f882c4f5c, type: 3}
+  _CountDownTime: 120
 --- !u!1 &4670180585177142562
 GameObject:
   m_ObjectHideFlags: 0
